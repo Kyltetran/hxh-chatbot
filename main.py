@@ -15,6 +15,10 @@ app.secret_key = '123456'
 CHROMA_PATH = "chroma"
 
 keyword_df = pd.read_csv("data/hxh_keywords.csv", delimiter=",")
+keyword_df.columns = keyword_df.columns.str.strip()
+keyword_df.columns = keyword_df.columns.str.replace("\ufeff", "")  # remove BOM
+print(keyword_df.columns)
+
 
 PROMPT_TEMPLATE = """
 Bạn là một nhà thơ Việt Nam thế kỷ XIX, am hiểu thơ Nôm và thể Đường luật.
@@ -38,7 +42,9 @@ Hãy viết bài **vịnh “{topic}”** theo **thể thơ Nôm Đường luậ
 
 3. Sau bài thơ, viết mục **CHÚ GIẢI**:  
    - liệt kê các từ đã dùng  
-   - kèm chữ Nôm, giải nghĩa, giải cấu tạo chữ (lấy đúng từ bảng)
+   - kèm chữ Nôm, giải nghĩa, giải cấu tạo chữ (lấy đúng từ bảng), trích dẫn (TV), trích dẫn (Nôm)
+   - thay dấu '\n' trong trích dẫn (TV + Nôm) bằng dấu xuống dòng trong mục chú giải
+   - sao y nguyên văn trích dẫn (TV), trích dẫn (Nôm)
 
 ---
 
@@ -50,9 +56,12 @@ def format_keywords(df):
     out = ""
     for _, row in df.iterrows():
         out += (
-            f"- {row['Từ / Cụm từ']} ({row['Chữ Nôm']}): {row['Giải nghĩa – Thi pháp']}\n"
-            f"  • Trích dẫn (TV): {row['Trích dẫn nguồn (Tiếng Việt)']}\n"
-            f"  • Trích dẫn (Nôm): {row['Trích dẫn nguồn (Chữ Nôm)']}\n\n"
+            f"TỪ: {row['Từ / Cụm từ']}\n"
+            f"Chữ Nôm: {row['Chữ Nôm']}\n"
+            f"Giải nghĩa: {row['Giải nghĩa – Thi pháp']}\n"
+            f"Trích dẫn (TV):\n{row['Trích dẫn nguồn (Tiếng Việt)']}\n"
+            f"Trích dẫn (Nôm):\n{row['Trích dẫn nguồn (Chữ Nôm)']}\n"
+            "---------------------------------------\n"
         )
     return out
 
@@ -72,6 +81,10 @@ def generate():
     # random keyword selection
     selected = keyword_df.sample(2)
     formatted_keywords = format_keywords(selected)
+
+    print("\n===== KEYWORDS BLOCK =====")
+    print(formatted_keywords)
+    print("==========================\n")
 
     # RAG retrieval
     db = Chroma(
@@ -111,7 +124,6 @@ def health_check():
 # if __name__ == "__main__":
 #     port = int(os.environ.get("PORT", 5000))
 #     app.run(host="0.0.0.0", port=port)
-
 # run local
 if __name__ == "__main__":
     app.run()
