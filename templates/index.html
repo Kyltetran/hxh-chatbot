@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Vịnh Thơ Nôm AI</title>
+</head>
+<body>
+    <h1>Viết thơ Nôm Đường luật bằng AI</h1>
+
+    <label>Chủ đề:</label>
+    <input id="topic" type="text" />
+
+    <label>Số câu:</label>
+    <select id="num_lines">
+        <option value="4">4 câu</option>
+        <option value="8" selected>8 câu</option>
+    </select>
+
+    <button onclick="generate()">Tạo bài thơ</button>
+
+    <pre id="output"></pre>
+
+<script>
+async function generate() {
+    const topic = document.getElementById("topic").value;
+    const num_lines = document.getElementById("num_lines").value;
+
+    const res = await fetch("/api/generate", {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({ topic, num_lines })
+    });
+    const data = await res.json();
+    document.getElementById("output").innerText = data.poem;
+}
+</script>
+
+</body>
+</html>
