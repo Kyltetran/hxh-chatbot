@@ -45,7 +45,8 @@ Hãy viết bài **vịnh “{topic}”** theo **thể thơ Nôm Đường luậ
    - kèm chữ Nôm, giải nghĩa, giải cấu tạo chữ (lấy đúng từ bảng), trích dẫn (TV), trích dẫn (Nôm)
    - thay dấu '\n' trong trích dẫn (TV + Nôm) bằng dấu xuống dòng trong mục chú giải
    - sao y nguyên văn trích dẫn (TV), trích dẫn (Nôm)
-   - sao y nguyên văn giải cấu tạo chữ
+   - giải cấu tạo chữ thành câu văn cho đầy đủ, rõ ràng, mạch lạc
+   - giải nghĩa thành câu văn cho đầy đủ, rõ ràng, mạch lạc
 
 ---
 
