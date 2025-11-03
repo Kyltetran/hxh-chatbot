@@ -45,6 +45,7 @@ Hãy viết bài **vịnh “{topic}”** theo **thể thơ Nôm Đường luậ
    - kèm chữ Nôm, giải nghĩa, giải cấu tạo chữ (lấy đúng từ bảng), trích dẫn (TV), trích dẫn (Nôm)
    - thay dấu '\n' trong trích dẫn (TV + Nôm) bằng dấu xuống dòng trong mục chú giải
    - sao y nguyên văn trích dẫn (TV), trích dẫn (Nôm)
+   - sao y nguyên văn giải cấu tạo chữ
 
 ---
 
@@ -58,6 +59,7 @@ def format_keywords(df):
         out += (
             f"TỪ: {row['Từ / Cụm từ']}\n"
             f"Chữ Nôm: {row['Chữ Nôm']}\n"
+            f"Giải cấu tạo chữ: {row['Giải cấu tạo chữ']}\n"
             f"Giải nghĩa: {row['Giải nghĩa – Thi pháp']}\n"
             f"Trích dẫn (TV):\n{row['Trích dẫn nguồn (Tiếng Việt)']}\n"
             f"Trích dẫn (Nôm):\n{row['Trích dẫn nguồn (Chữ Nôm)']}\n"
