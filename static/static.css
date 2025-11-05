@@ -443,6 +443,7 @@ body {
 .keyword-citation {
   margin-top: 0px;
   margin-left: 12px;
+  margin-bottom: 12px;
   padding-left: 22px;
   border-left: 3px solid #d4a853;
   font-style: italic;

@@ -315,10 +315,8 @@ function formatExplanation(explanation) {
  * @returns {string} - Formatted HTML
  */
 function formatKeywordEntry(entry) {
-  const lines = entry
-    .split("\n")
-    .map((l) => l.trim())
-    .filter((l) => l);
+  const rawLines = entry.split("\n");
+  const lines = rawLines.map(l => l.trim());
   if (lines.length === 0) return "";
 
   // First line is usually the keyword (might start with number)
@@ -370,7 +368,7 @@ function formatKeywordEntry(entry) {
         .trim();
       if (citationText) {
         contentHTML += `<div class="keyword-detail"><span class='explanation-label'>Trích dẫn (TV):</span></div>`;
-        contentHTML += `<div class="keyword-citation">${citationText}`;
+        contentHTML += `<div class="keyword-citation">${citationText.replace(/\n/g, "<br>")}`;
         inCitation = true;
       } else {
         contentHTML += `<div class="keyword-detail"><span class='explanation-label'>Trích dẫn (TV):</span></div><div class="keyword-citation">`;
@@ -389,7 +387,7 @@ function formatKeywordEntry(entry) {
         .trim();
       if (citationText) {
         contentHTML += `<div class="keyword-detail"><span class='explanation-label'>Trích dẫn (Nôm):</span></div>`;
-        contentHTML += `<div class="keyword-citation">${citationText}`;
+        contentHTML += `<div class="keyword-citation">${citationText.replace(/\n/g, "<br>")}`;
         inCitation = true;
       } else {
         contentHTML += `<div class="keyword-detail"><span class='explanation-label'>Trích dẫn (Nôm):</span></div><div class="keyword-citation">`;
@@ -403,7 +401,7 @@ function formatKeywordEntry(entry) {
       inCitation = false;
     } else if (inCitation) {
       // Continue citation
-      contentHTML += `<br>${line}`;
+      contentHTML += `<br>${line.replace(/\n/g, "<br>")}`;
     } else {
       // Regular content line
       contentHTML += `<div class="keyword-detail">${line}</div>`;

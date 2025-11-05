@@ -48,8 +48,7 @@ Hãy viết bài **vịnh "{topic}"** theo **thể thơ Nôm Đường luật** 
    - Mỗi từ/cụm từ được liệt kê riêng biệt, bắt đầu bằng số thứ tự (1., 2., 3.,...)
    - Mỗi từ phải có đầy đủ: Chữ Nôm, Giải cấu tạo chữ, Giải nghĩa, Trích dẫn (TV), Trích dẫn (Nôm)
    - Thay dấu '\n' trong trích dẫn (TV + Nôm) bằng dấu xuống dòng
-   - Sao y nguyên văn trích dẫn (TV), trích dẫn (Nôm)
-   - Giải cấu tạo chữ và giải nghĩa thành câu văn đầy đủ, rõ ràng, mạch lạc
+   - Sao y nguyên văn chữ Nôm, giải cấu tạo chữ, giải nghĩa, trích dẫn (TV), trích dẫn (Nôm)
 
    **Định dạng chú giải:**
    1. [tên từ]
@@ -142,9 +141,9 @@ def health_check():
 
 
 # deploy
-if __name__ == "__main__":
-    port = int(os.environ.get("PORT", 5000))
-    app.run(host="0.0.0.0", port=port)
-# run local
 # if __name__ == "__main__":
-#     app.run()
+#     port = int(os.environ.get("PORT", 5000))
+#     app.run(host="0.0.0.0", port=port)
+# run local
+if __name__ == "__main__":
+    app.run()
