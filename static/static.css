@@ -1,0 +1,640 @@
+/* ===================================
+   Side Cloud Patterns
+   =================================== */
+.cloud-side {
+  position: absolute;
+  width: 260px;
+  height: 120px;
+  background-image: url("assets/background.png");
+  background-repeat: no-repeat;
+  background-size: contain;
+  z-index: 2;
+  pointer-events: none;
+  opacity: 0.85;
+}
+.cloud-left {
+  left: 0;
+  top: 600px; /* will be set dynamically */
+}
+.cloud-right {
+  right: 0;
+  top: 900px; /* will be set dynamically */
+}
+@media (max-width: 900px) {
+  .cloud-side {
+    width: 160px;
+    height: 80px;
+  }
+}
+/* ===================================
+   Footer Styles
+   =================================== */
+
+.footer {
+  margin-top: 60px;
+  padding: 32px 0 18px 0;
+  text-align: center;
+  color: #8a929b;
+  font-size: 14px;
+  background: none;
+}
+.footer-citation {
+  margin-bottom: 8px;
+  line-height: 1.5;
+}
+.footer-separator {
+  width: 120px;
+  height: 1px;
+  background: #e0e0e0;
+  margin: 14px auto;
+}
+.footer-copyright {
+  font-size: 12px;
+  margin-top: 8px;
+}
+/* ===================================
+   CSS Reset & Base Styles
+   =================================== */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+}
+
+body {
+  font-family: "Arial Unicode MS", Arial, sans-serif;
+  background-color: #ffffff;
+  color: #000000;
+  line-height: 1.6;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* ===================================
+   Custom Font Definitions
+   =================================== */
+
+@font-face {
+  font-family: "NomNaTong";
+  src: url("Font/NomNaTong-Regular.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "1FTV Maglony";
+  src: url("Font/1FTV-Maglony.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+.explanation-label,
+.keyword-detail,
+.keyword-citation {
+  font-family: "NomNaTong", Arial, sans-serif;
+}
+
+.main-title {
+  font-family: "1FTV Maglony", "Times New Roman", serif;
+}
+
+/* ===================================
+   Cloud Pattern Decoration
+   =================================== */
+
+.cloud-pattern {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 350px;
+  background-image: url("assets/background.png");
+  background-repeat: repeat-x;
+  background-position: top left;
+  background-size: auto 180%;
+  z-index: 1;
+  pointer-events: none;
+  opacity: 1;
+}
+
+/* ===================================
+   Main Container
+   =================================== */
+
+.container {
+  position: relative;
+  z-index: 2;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 60px 20px 40px;
+}
+
+/* ===================================
+   Title Section
+   =================================== */
+
+.title-section {
+  text-align: center;
+  margin-bottom: 50px;
+  margin-top: 240px;
+}
+
+.main-title {
+  font-size: 48px;
+  font-weight: bold;
+  color: #000000;
+  margin-bottom: 20px;
+  letter-spacing: 0.5px;
+}
+
+.subtitle {
+  font-size: 15px;
+  color: #808080;
+  font-weight: normal;
+  letter-spacing: 0.3px;
+  line-height: 1.5;
+}
+
+/* ===================================
+   Form Container
+   =================================== */
+
+.form-container {
+  background: #ffffff;
+  border-radius: 20px;
+  padding: 45px 60px 50px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  border: 1px solid #e8e8e8;
+  max-width: 880px;
+  margin: 0 auto 40px;
+}
+
+/* ===================================
+   Form Elements
+   =================================== */
+
+.form-group {
+  margin-bottom: 32px;
+}
+
+.form-group label {
+  display: block;
+  font-size: 14px;
+  font-weight: 600;
+  color: #000000;
+  margin-bottom: 14px;
+  letter-spacing: 0.3px;
+}
+
+.form-group input[type="text"],
+.form-group select {
+  width: 100%;
+  padding: 18px 24px;
+  font-size: 15px;
+  font-family: "Arial Unicode MS", Arial, sans-serif;
+  border: 1px solid #d4d4d4;
+  border-radius: 8px;
+  background-color: #ffffff;
+  transition: all 0.3s ease;
+  color: #000000;
+}
+
+.form-group input[type="text"]:focus,
+.form-group select:focus {
+  outline: none;
+  border-color: #999999;
+  background-color: #ffffff;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1);
+}
+
+.form-group input[type="text"]::placeholder {
+  color: #999999;
+  font-style: italic;
+}
+
+.form-group select {
+  cursor: pointer;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%23666' d='M1.41 0L6 4.59L10.59 0L12 1.41l-6 6l-6-6z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 24px center;
+  background-size: 14px;
+  padding-right: 55px;
+}
+
+/* ===================================
+   Submit Button
+   =================================== */
+
+.submit-btn {
+  width: 100%;
+  padding: 20px 32px;
+  font-size: 15px;
+  font-weight: 600;
+  font-family: "Arial Unicode MS", Arial, sans-serif;
+  color: #ffffff;
+  background-color: #000000;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  margin-top: 20px;
+  letter-spacing: 0.3px;
+  position: relative;
+  overflow: hidden;
+}
+
+.submit-btn:hover {
+  background-color: #1a1a1a;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.submit-btn:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.submit-btn:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+/* Button Loading State */
+.btn-loader {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+/* Spinner Animation */
+.spinner {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  border: 2px solid #ffffff;
+  border-top-color: transparent;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ===================================
+   Error Message
+   =================================== */
+
+.error-message {
+  margin-top: 20px;
+  padding: 15px;
+  background-color: #ffebee;
+  border-left: 4px solid #c62828;
+  border-radius: 4px;
+  color: #c62828;
+  font-size: 14px;
+  animation: slideDown 0.3s ease;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ===================================
+   Output Section
+   =================================== */
+
+.output-section {
+  max-width: 880px;
+  margin: 40px auto;
+  animation: fadeIn 0.5s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.poem-container {
+  background: #ffffff;
+  border-radius: 20px;
+  padding: 50px 60px 55px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  border: 1px solid #e8e8e8;
+}
+
+.output-title {
+  font-family: "1FTV Maglony", "Times New Roman", serif;
+  font-size: 28px;
+  font-weight: normal;
+  color: #000000;
+  margin-bottom: 35px;
+  text-align: center;
+  border-bottom: 1px solid #d4d4d4;
+  padding-bottom: 25px;
+  letter-spacing: 0.5px;
+}
+
+.poem-output {
+  font-family: "Arial Unicode MS", Arial, sans-serif;
+  font-size: 17px;
+  line-height: 1.9;
+  color: #000000;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  text-align: center;
+  margin-bottom: 35px;
+  padding: 0;
+  background-color: transparent;
+  border-radius: 0;
+  border-left: none;
+}
+
+/* ===================================
+   Keywords Section & Explanation
+   =================================== */
+
+.poem-separator {
+  width: 120px;
+  height: 1px;
+  background-color: #d4d4d4;
+  margin: 40px auto 35px;
+}
+
+.explanation-section {
+  margin-top: 40px;
+  border-top: 1px solid #d4d4d4;
+  padding-top: 35px;
+}
+
+.explanation-title {
+  font-family: "1FTV Maglony", "Times New Roman", serif;
+  font-size: 28px;
+  font-weight: normal;
+  color: #000000;
+  text-align: center;
+  margin-bottom: 30px;
+  letter-spacing: 0.5px;
+}
+.explanation-label {
+  font-weight: normal;
+  color: #000;
+  opacity: 1;
+}
+.keyword-detail,
+.keyword-citation {
+  opacity: 0.7;
+}
+
+.keyword-item {
+  margin-bottom: 30px;
+  padding: 20px;
+  background-color: #fafafa;
+  border-radius: 12px;
+  border: 1px solid #e8e8e8;
+}
+
+.keyword-item h4 {
+  font-size: 16px;
+  font-weight: 700;
+  color: #000000;
+  margin-bottom: 15px;
+  text-transform: capitalize;
+}
+
+.keyword-detail {
+  margin-bottom: 12px;
+  line-height: 1.7;
+  font-size: 15px;
+  color: #333333;
+  font-weight: normal;
+}
+
+.keyword-detail strong {
+  color: #666666;
+  font-weight: 600;
+  opacity: 0.8;
+}
+
+.keyword-citation {
+  margin-top: 0px;
+  margin-left: 12px;
+  padding-left: 22px;
+  border-left: 3px solid #d4a853;
+  font-style: italic;
+  color: #666666;
+  font-size: 15px;
+  line-height: 1.2;
+  background: none;
+}
+
+.keywords-section {
+  margin-top: 25px;
+  padding-top: 20px;
+  border-top: 1px solid #e0e0e0;
+  display: none;
+}
+
+.keywords-section h3 {
+  font-size: 16px;
+  color: #666666;
+  margin-bottom: 12px;
+  font-weight: 600;
+}
+
+.keywords-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.keyword-tag {
+  display: inline-block;
+  padding: 6px 14px;
+  background-color: #f5f5f5;
+  color: #333333;
+  border-radius: 20px;
+  font-size: 14px;
+  border: 1px solid #e0e0e0;
+}
+
+/* ===================================
+   Responsive Design
+   =================================== */
+
+@media (max-width: 768px) {
+  .cloud-pattern {
+    height: 250px;
+  }
+
+  .container {
+    padding: 40px 15px 30px;
+  }
+
+  .title-section {
+    margin-top: 170px;
+    margin-bottom: 40px;
+  }
+
+  .main-title {
+    font-size: 32px;
+  }
+
+  .subtitle {
+    font-size: 14px;
+  }
+
+  .form-container {
+    padding: 35px 30px 40px;
+    border-radius: 16px;
+  }
+
+  .form-group {
+    margin-bottom: 24px;
+  }
+
+  .poem-container {
+    padding: 35px 30px 40px;
+    border-radius: 16px;
+  }
+
+  .output-title {
+    font-size: 24px;
+    margin-bottom: 28px;
+    padding-bottom: 20px;
+  }
+
+  .poem-output {
+    font-size: 16px;
+    line-height: 1.8;
+    margin-bottom: 28px;
+  }
+
+  .explanation-title {
+    font-size: 18px;
+    margin-bottom: 24px;
+  }
+
+  .keyword-item {
+    padding: 16px;
+    margin-bottom: 20px;
+  }
+
+  .keyword-item h4 {
+    font-size: 15px;
+  }
+
+  .keyword-detail {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .main-title {
+    font-size: 24px;
+  }
+
+  .subtitle {
+    font-size: 13px;
+  }
+
+  .form-container {
+    padding: 25px 20px;
+  }
+
+  .poem-container {
+    padding: 25px 20px 30px;
+  }
+
+  .output-title {
+    font-size: 20px;
+    margin-bottom: 24px;
+    padding-bottom: 18px;
+  }
+
+  .poem-output {
+    font-size: 15px;
+    line-height: 1.75;
+  }
+
+  .explanation-title {
+    font-size: 17px;
+    margin-bottom: 20px;
+  }
+
+  .keyword-item {
+    padding: 14px;
+    margin-bottom: 16px;
+  }
+
+  .keyword-item h4 {
+    font-size: 14px;
+  }
+
+  .keyword-detail {
+    font-size: 13px;
+  }
+}
+
+/* ===================================
+   Utility Classes
+   =================================== */
+
+.hidden {
+  display: none !important;
+}
+
+.fade-in {
+  animation: fadeIn 0.5s ease;
+}
+
+.text-center {
+  text-align: center;
+}
+
+/* ===================================
+   Accessibility Improvements
+   =================================== */
+
+/* Focus visible for keyboard navigation */
+*:focus-visible {
+  outline: 2px solid #000000;
+  outline-offset: 2px;
+}
+
+/* Screen reader only content */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}

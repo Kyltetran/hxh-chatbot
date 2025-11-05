@@ -1,5 +1,6 @@
 from flask import Flask, jsonify, request, render_template, session
 import pandas as pd
+
 # from flask_cors import CORS
 from langchain_chroma import Chroma
 from langchain.prompts import ChatPromptTemplate
@@ -10,7 +11,7 @@ import os
 
 app = Flask(__name__)
 # CORS(app)
-app.secret_key = '123456'
+app.secret_key = "123456"
 
 CHROMA_PATH = "chroma"
 
@@ -29,24 +30,38 @@ Dưới đây là vài bài thơ mẫu để học cấu trúc và phong cách:
 ---
 
 **NHIỆM VỤ**
-Hãy viết bài **vịnh “{topic}”** theo **thể thơ Nôm Đường luật** (độ dài: {num_lines} câu).
+Hãy viết bài **vịnh "{topic}"** theo **thể thơ Nôm Đường luật** (độ dài: {num_lines} câu).
 
 **YÊU CẦU BẮT BUỘC**
 1. Phải sử dụng **ít nhất một** trong các từ/cụm từ sau đây từ bảng Hồ Xuân Hương:
 {selected_keywords}
 
-2. Giữ phong vị của Hồ Xuân Hương:  
-   - dân gian, phồn thực  
-   - mỉa mai, táo bạo mà tinh tế  
-   - hình ảnh sinh động, chữ Nôm gợi cảm  
+2. Giữ phong vị của Hồ Xuân Hương:
+   - dân gian, phồn thực
+   - mỉa mai, táo bạo mà tinh tế
+   - hình ảnh sinh động, chữ Nôm gợi cảm
 
-3. Sau bài thơ, viết mục **CHÚ GIẢI**:  
-   - liệt kê các từ đã dùng  
-   - kèm chữ Nôm, giải nghĩa, giải cấu tạo chữ (lấy đúng từ bảng), trích dẫn (TV), trích dẫn (Nôm)
-   - thay dấu '\n' trong trích dẫn (TV + Nôm) bằng dấu xuống dòng trong mục chú giải
-   - sao y nguyên văn trích dẫn (TV), trích dẫn (Nôm)
-   - giải cấu tạo chữ thành câu văn cho đầy đủ, rõ ràng, mạch lạc
-   - giải nghĩa thành câu văn cho đầy đủ, rõ ràng, mạch lạc
+3. **QUAN TRỌNG**: KHÔNG viết tiêu đề hay tên chủ đề ở đầu bài thơ (như "KHOAI LANG" hay "Thơ về...").
+   Chỉ viết nội dung bài thơ, bắt đầu ngay từ câu thơ đầu tiên.
+
+4. Sau bài thơ, viết mục **CHÚ GIẢI**:
+   - Mỗi từ/cụm từ được liệt kê riêng biệt, bắt đầu bằng số thứ tự (1., 2., 3.,...)
+   - Mỗi từ phải có đầy đủ: Chữ Nôm, Giải cấu tạo chữ, Giải nghĩa, Trích dẫn (TV), Trích dẫn (Nôm)
+   - Thay dấu '\n' trong trích dẫn (TV + Nôm) bằng dấu xuống dòng
+   - Sao y nguyên văn trích dẫn (TV), trích dẫn (Nôm)
+   - Giải cấu tạo chữ và giải nghĩa thành câu văn đầy đủ, rõ ràng, mạch lạc
+
+   **Định dạng chú giải:**
+   1. [tên từ]
+   - Chữ Nôm: [chữ Nôm]
+   - Giải cấu tạo chữ: [giải thích cấu tạo]
+   - Giải nghĩa: [ý nghĩa]
+   - Trích dẫn (TV): [trích dẫn tiếng Việt]
+   - Trích dẫn (Nôm): [trích dẫn chữ Nôm]
+
+   2. [tên từ tiếp theo]
+   - Chữ Nôm: [chữ Nôm]
+   ...
 
 ---
 
@@ -62,17 +77,17 @@ def format_keywords(df):
             f"Chữ Nôm: {row['Chữ Nôm']}\n"
             f"Giải cấu tạo chữ: {row['Giải cấu tạo chữ']}\n"
             f"Giải nghĩa: {row['Giải nghĩa – Thi pháp']}\n"
-            f"Trích dẫn (TV):\n{row['Trích dẫn nguồn (Tiếng Việt)']}\n"
+            f"Trích dẫn (Tiếng Việt):\n{row['Trích dẫn nguồn (Tiếng Việt)']}\n"
             f"Trích dẫn (Nôm):\n{row['Trích dẫn nguồn (Chữ Nôm)']}\n"
             "---------------------------------------\n"
         )
     return out
 
 
-@app.route('/')
+@app.route("/")
 def index():
     session.clear()
-    return render_template('index.html')
+    return render_template("index.html")
 
 
 @app.route("/api/generate", methods=["POST"])
@@ -91,8 +106,7 @@ def generate():
 
     # RAG retrieval
     db = Chroma(
-        persist_directory=CHROMA_PATH,
-        embedding_function=get_embedding_function()
+        persist_directory=CHROMA_PATH, embedding_function=get_embedding_function()
     )
     context_docs = db.similarity_search(topic, k=4)
     context_text = "\n---\n".join([doc.page_content for doc in context_docs])
@@ -108,19 +122,23 @@ def generate():
     model = ChatOpenAI(model="gpt-4o")
     answer = model.invoke(prompt).content
 
-    return jsonify({
-        "poem": answer,
-        "keywords_used": selected.to_dict(orient="records")
-    })
+    return jsonify(
+        {"poem": answer, "keywords_used": selected.to_dict(orient="records")}
+    )
 
 
 # check server health
-@app.route('/health', methods=['GET'])
+@app.route("/health", methods=["GET"])
 def health_check():
-    return jsonify({
-        "status": "healthy",
-        "message": "Server is running fine!",
-    }), 200
+    return (
+        jsonify(
+            {
+                "status": "healthy",
+                "message": "Server is running fine!",
+            }
+        ),
+        200,
+    )
 
 
 # deploy

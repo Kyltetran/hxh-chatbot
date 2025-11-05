@@ -1,39 +1,117 @@
 <!DOCTYPE html>
-<html>
-<head>
-    <meta charset="UTF-8">
-    <title>Vịnh Thơ Nôm AI</title>
-</head>
-<body>
-    <h1>Viết thơ Nôm Đường luật bằng AI</h1>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Tạo thơ Nôm Đường luật theo phong cách Hồ Xuân Hương bằng AI"
+    />
+    <title>Viết thơ Nôm Đường luật bằng AI</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='static.css') }}"
+    />
+  </head>
+  <body>
+    <!-- Cloud Pattern Decoration -->
+    <div class="cloud-pattern"></div>
 
-    <label>Chủ đề:</label>
-    <input id="topic" type="text" />
+    <!-- Main Container -->
+    <div class="container">
+      <!-- Title Section -->
+      <div class="title-section">
+        <h1 class="main-title">Viết thơ Nôm Đường luật bằng AI</h1>
+        <p class="subtitle">
+          Khám phá nghệ thuật thơ Nôm theo phong cách Hồ Xuân Hương, nơi
+          truyền<br />
+          thống gặp gỡ công nghệ hiện đại
+        </p>
+      </div>
 
-    <label>Số câu:</label>
-    <select id="num_lines">
-        <option value="4">4 câu</option>
-        <option value="8" selected>8 câu</option>
-    </select>
+      <!-- Form Container -->
+      <div class="form-container">
+        <form id="poem-form" aria-label="Form tạo bài thơ">
+          <!-- Topic Input -->
+          <div class="form-group">
+            <label for="topic">Chủ đề</label>
+            <input
+              type="text"
+              id="topic"
+              name="topic"
+              placeholder="khoai lang"
+              aria-label="Nhập chủ đề cho bài thơ"
+              required
+            />
+          </div>
 
-    <button onclick="generate()">Tạo bài thơ</button>
+          <!-- Number of Lines Selection -->
+          <div class="form-group">
+            <label for="num_lines">Số câu</label>
+            <select
+              id="num_lines"
+              name="num_lines"
+              aria-label="Chọn số câu thơ"
+            >
+              <option value="4">4 câu</option>
+              <option value="8" selected>8 câu</option>
+            </select>
+          </div>
 
-    <pre id="output"></pre>
+          <!-- Submit Button -->
+          <button type="submit" class="submit-btn" id="submit-btn">
+            <span class="btn-text">Tạo bài thơ</span>
+            <span class="btn-loader" style="display: none">
+              <span class="spinner"></span> Đang tạo...
+            </span>
+          </button>
+        </form>
 
-<script>
-async function generate() {
-    const topic = document.getElementById("topic").value;
-    const num_lines = document.getElementById("num_lines").value;
+        <!-- Error Message -->
+        <div
+          id="error-message"
+          class="error-message"
+          style="display: none"
+        ></div>
+      </div>
 
-    const res = await fetch("/api/generate", {
-        method: "POST",
-        headers: {"Content-Type": "application/json"},
-        body: JSON.stringify({ topic, num_lines })
-    });
-    const data = await res.json();
-    document.getElementById("output").innerText = data.poem;
-}
-</script>
+      <!-- Output Section -->
+      <div id="output-section" class="output-section" style="display: none">
+        <div class="poem-container">
+          <h2 class="output-title">Bài thơ của bạn</h2>
+          <pre id="output" class="poem-output"></pre>
+          <div class="poem-separator"></div>
+          <div id="explanation-section" class="explanation-section">
+            <h3 class="explanation-title">Giải thích từ ngữ</h3>
+            <div id="explanation-content"></div>
+          </div>
+          <div id="keywords-used" class="keywords-section"></div>
+        </div>
+      </div>
+    </div>
 
-</body>
+    <div
+      id="cloud-left"
+      class="cloud-side cloud-left"
+      style="display: none"
+    ></div>
+    <div
+      id="cloud-right"
+      class="cloud-side cloud-right"
+      style="display: none"
+    ></div>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="footer-citation">
+        Tư liệu trích từ Tự điển chữ Nôm dẫn giải, GS. Nguyễn Quang Hồng (chủ
+        biên), NXB Khoa học Xã hội, 2014.<br />
+        Source: Annotated Dictionary of Nôm Characters, ed. Nguyễn Quang Hồng,
+        Social Sciences Publishing House, 2014.
+      </div>
+      <div class="footer-separator"></div>
+      <div class="footer-copyright">© 2025 Digitizing Việt Nam</div>
+    </footer>
+  </body>
 </html>
