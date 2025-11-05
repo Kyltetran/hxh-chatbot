@@ -306,6 +306,7 @@ function formatExplanation(explanation) {
     html += formatKeywordEntry(entry);
   }
 
+  html = html.replace(/\n/g, "<br>");
   return html;
 }
 /**
